@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="Task1" Id="{f4959fe6-ad9b-4362-8c92-8ff98709f152}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Task1
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	aRandom : ARRAY[0..19] OF LREAL;  
+	aMoved : ARRAY[0..19] OF LREAL; 
+	aTest : ARRAY[0..19] OF LREAL; 
+    i,j	: INT;                 
+    lrRandValue: LREAL;
+	Rand:DRAND;
+	xGenerateOnce : BOOL := TRUE;
+	iExecuteOnce : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF xGenerateOnce THEN
+IF i=20 THEN // tu nie jesetem pewien, ale ten warunek jak zmienie na 19 to tablica generuje się w kółko, a przy 20 zmieniłem zakres tablicy na 20 i wartośc nie przypisała sie do tego 20 elementu,
+		xGenerateOnce:=FALSE;
+END_IF
+	FOR i := 0 TO 19 BY 1 DO 
+		Rand(Seed:= , Num=>lrRandValue );
+    	aRandom[i] := lrRandValue*100;      
+	END_FOR
+END_IF
+
+IF iExecuteOnce=0 THEN	
+	MEMMOVE(destAddr := ADR(aMoved[1]), srcAddr := ADR(aRandom[0]), n := SIZEOF(aRandom) - SIZEOF(aRandom[0]));
+	iExecuteOnce:=1;
+END_IF
+
+MEMMOVE(destAddr := ADR(aRandom), srcAddr := ADR(aMoved), n := SIZEOF(aMoved));
+aRandom[0]:=1;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="Task1">
+      <LineId Id="69" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="70" Count="3" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="94" Count="1" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="93" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

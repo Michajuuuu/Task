@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="Task2" Id="{c7253e7e-121f-4445-82f2-1134c52642e9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Task2
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	
+	axTest : ARRAY[0..19] OF BOOL;
+	i	:INT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 0 TO 19 BY 1 DO 	
+	axTest[i]:= FALSE;
+END_FOR
+axTest[7]:= TRUE;
+
+CheckIfAnyArrayElementIsTrue(axCheckTest:=axTest);]]></ST>
+    </Implementation>
+    <Method Name="CheckIfAnyArrayElementIsTrue" Id="{f7ef02a5-b49f-4830-9531-ce54502d9b61}">
+      <Declaration><![CDATA[METHOD CheckIfAnyArrayElementIsTrue : BOOL
+VAR_INPUT
+	axCheckTest : ARRAY[0..19] OF BOOL;
+END_VAR
+VAR
+	i	:INT;
+	xCheck:BOOL;
+END_VAR
+VAR_INST
+	xInArrayExistsTrueValue:BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO 19 BY 1 DO 		
+	
+	IF axCheckTest[i] THEN
+		
+		xInArrayExistsTrueValue:=TRUE;
+	
+	ELSE
+		;
+	END_IF
+	
+END_FOR
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="Task2">
+      <LineId Id="12" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="Task2.CheckIfAnyArrayElementIsTrue">
+      <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

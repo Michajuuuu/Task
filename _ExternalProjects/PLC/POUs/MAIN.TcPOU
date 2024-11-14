@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="MAIN" Id="{0b88644e-bdd6-4b1d-9d5c-bb337beb1445}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbArray:Task1;
+	fbArrayCheck:Task2;
+	fbPage:Task3_GLV_HMI;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbArray();
+fbArrayCheck();
+fbPage();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
